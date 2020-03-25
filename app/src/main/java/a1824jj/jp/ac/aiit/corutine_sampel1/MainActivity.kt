@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,9 +34,12 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun downLoadUserData() {
+    private suspend fun downLoadUserData() {
         for (i in 1..200000){
-            Log.w("MyTag","Downloading user $i in ${Thread.currentThread().name}")
+            //Log.w("MyTag","Downloading user $i in ${Thread.currentThread().name}")
+            withContext(Dispatchers.Main){
+                binding.tvCount.text = "Downloading user $i in ${Thread.currentThread().name}"
+            }
         }
     }
 }
