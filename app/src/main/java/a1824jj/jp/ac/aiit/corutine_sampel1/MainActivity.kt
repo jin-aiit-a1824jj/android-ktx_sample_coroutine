@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.databinding.DataBindingUtil
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,7 +24,9 @@ class MainActivity : AppCompatActivity() {
             }
 
             btnDownLoadUserData.setOnClickListener {
-                downLoadUserData()
+                CoroutineScope(Dispatchers.IO).launch {
+                    downLoadUserData()
+                }
             }
 
         }
